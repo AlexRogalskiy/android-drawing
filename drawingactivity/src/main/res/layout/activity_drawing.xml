@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Marc Auberer 2021. All rights reserved
+  -->
+
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    android:id="@+id/slidingLayout"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="65dp"
+    sothree:umanoShadowHeight="3dp"
+    sothree:umanoScrollableView="@id/scrollView"
+    tools:context=".DrawingActivity" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar" />
+
+        <com.raed.drawingview.DrawingView
+            android:id="@+id/drawingView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            sothree:layout_constraintTop_toBottomOf="@+id/toolbar"
+            sothree:layout_constraintBottom_toBottomOf="parent"
+            app:brush="pen"
+            app:brush_color="#000"
+            app:drawing_background_color="#eee" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/colorPreview"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            sothree:layout_constraintTop_toTopOf="parent"
+            sothree:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/round_button"
+            android:tint="@color/black"/>
+
+        <TextView
+            android:id="@+id/current_utility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sothree:layout_constraintTop_toTopOf="parent"
+            sothree:layout_constraintStart_toEndOf="@+id/colorPreview"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="15dp"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/currentSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sothree:layout_constraintTop_toBottomOf="@+id/current_utility"
+            sothree:layout_constraintStart_toEndOf="@+id/colorPreview"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="15dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/arrow"
+            android:layout_width="34dp"
+            android:layout_height="55dp"
+            sothree:layout_constraintEnd_toEndOf="parent"
+            sothree:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            app:srcCompat="@drawable/arrow_drop_up_black"
+            android:clickable="true"
+            android:tint="@color/gray_light"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true" />
+
+        <com.raed.drawingview.BrushView
+            android:id="@+id/brushView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="130dp"
+            sothree:layout_constraintTop_toBottomOf="@+id/colorPreview"/>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            sothree:layout_constraintTop_toBottomOf="@+id/brushView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:id="@+id/colorContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    sothree:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/colorPreviewSlide"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        app:srcCompat="@drawable/round_button"
+                        android:tint="@color/black"/>
+
+                    <Button
+                        android:id="@+id/chooseColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_color"
+                        android:layout_marginTop="3dp"/>
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    sothree:layout_constraintTop_toBottomOf="@+id/colorContainer"
+                    android:min="1"
+                    android:max="100"
+                    android:progress="25"
+                    android:layout_marginTop="5dp"
+                    tools:targetApi="o"/>
+
+                <RadioGroup
+                    android:id="@+id/utility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    sothree:layout_constraintTop_toBottomOf="@+id/size">
+
+                    <RadioButton
+                        android:id="@+id/utilityPencil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pencil"/>
+
+                    <RadioButton
+                        android:id="@+id/utilityEraser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eraser"/>
+
+                    <RadioButton
+                        android:id="@+id/utilityAirbrush"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/air_brush"/>
+
+                    <RadioButton
+                        android:id="@+id/utilityCalligraphy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/calligraphy"/>
+
+                    <RadioButton
+                        android:id="@+id/utilityPen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/pen"/>
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    sothree:layout_constraintTop_toBottomOf="@+id/utility"
+                    android:background="@color/gray_light"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <RadioGroup
+                    android:id="@+id/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    sothree:layout_constraintTop_toBottomOf="@+id/utility"
+                    android:layout_marginTop="5dp">
+
+                    <RadioButton
+                        android:id="@+id/backgroundColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/background_color"
+                        android:checked="true"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/backgroundColorPreview"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:srcCompat="@drawable/round_button"
+                            android:tint="#eee" />
+
+                        <Button
+                            android:id="@+id/chooseBackgroundColor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/choose_color"/>
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:id="@+id/backgroundImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/background_image" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:orientation="horizontal">
+
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/backgroundImagePreview"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:civ_border="false"/>
+
+                        <Button
+                            android:id="@+id/chooseBackgroundImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/choose_image"
+                            android:enabled="false"/>
+                    </LinearLayout>
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    sothree:layout_constraintTop_toBottomOf="@+id/background"
+                    android:background="@color/gray_light"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <Button
+                    android:id="@+id/clear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/clear_image"
+                    sothree:layout_constraintTop_toBottomOf="@+id/divider2"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

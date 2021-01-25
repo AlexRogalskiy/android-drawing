@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Marc Auberer 2021. All rights reserved
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chillibits.drawingactivity">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application>
+        <activity
+            android:name="com.chillibits.drawingactivity.DrawingActivity"
+            android:theme="@style/DrawingStyle"/>
+    </application>
+
+</manifest>
